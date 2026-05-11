@@ -13,6 +13,12 @@ public class AudioManager : MonoBehaviour
     {
         Obstacle.OnPlayerHit += PlayCollisionSound;
     }
+    private void OnDisable()
+    {
+        Obstacle.OnPlayerHit += PlayCollisionSound;
+    }
+
+
 
     // Update is called once per frame
     private void PlayCollisionSound()
