@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
     public delegate void TimerEvent();
     private DateTime raceStart;
     private TimeSpan raceTime;
+    private TimeSpan penaltyTime;
     private bool racing;
+    [SerializeField] private int penaltyTimeVal;
 
 
     private void OnEnable()
@@ -14,6 +16,11 @@ public class GameManager : MonoBehaviour
        
         StartGate.StartRace += OnRaceStart;
         FinishGate.FinishRace += OnRaceFinish;
+        SlalonFlag.RacePenalty += AddRacePenalty;
+    }
+    void AddRacePenalty()
+    {
+        penaltyTime+= new TimeSpan(0,0,penaltyTimeVal);
     }
     void OnRaceStart()
     {
@@ -37,7 +44,7 @@ public class GameManager : MonoBehaviour
             raceTime = DateTime.Now - raceStart;
             
         }
-        Debug.Log("Race time " + raceTime);
+        Debug.Log("Race time " + raceTime + penaltyTime);
 
     }
 
